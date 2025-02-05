@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/lyrics")
-@SuppressWarnings("WildcardImport")
 class LyricsController(
     private val service: LyricsService
 ) {
