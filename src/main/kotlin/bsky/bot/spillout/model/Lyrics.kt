@@ -16,7 +16,7 @@ data class Lyrics(
     val lyric: String,
 
     @Column
-    val album: String,
+    val track: String,
 
     @Column
     val artist: String

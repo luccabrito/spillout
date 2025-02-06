@@ -4,12 +4,12 @@ import bsky.bot.spillout.model.Lyrics
 
 data class LyricCreationRequest(
     val lyric: String,
-    val album: String,
+    val track: String,
     val artist: String
 ) {
     fun toDomain() = Lyrics(
         lyric = lyric,
-        album = album,
+        track = track,
         artist = artist
     )
 }
