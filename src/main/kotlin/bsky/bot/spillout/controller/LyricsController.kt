@@ -37,4 +37,9 @@ class LyricsController(
     fun getRandom(): Lyrics {
         return service.getRandomLyrics()
     }
+
+    @GetMapping("/random/bot")
+    fun getRandomBot(): Lyrics {
+        return service.getRandomLyricsBot()
+    }
 }

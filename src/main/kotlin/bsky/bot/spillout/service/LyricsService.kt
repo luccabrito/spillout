@@ -25,10 +25,17 @@ class LyricsService(
     }
 
     fun getRandomLyrics(): Lyrics {
-        val size = lyricsRepository.findAll().size
-        val number = Random().nextInt(1, size + 1)
-        return lyricsRepository.findById(number.toLong()).orElseThrow {
-            IllegalArgumentException("Lyrics with id $size not found")
-        }
+        return lyricsRepository.findAll().random()
+    }
+
+    fun getRandomLyricsBot(): Lyrics {
+        val allRecords = lyricsRepository.findAll()
+        val maxTimesChosen = allRecords.maxOfOrNull { it.timesChosen } ?: 0
+        val threshold = maxTimesChosen - 2
+        val selectedRecord = generateSequence { allRecords.random() }
+            .first{ it.timesChosen < threshold }
+        selectedRecord.timesChosen++
+
+        return selectedRecord
     }
 }

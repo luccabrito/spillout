@@ -19,7 +19,10 @@ data class Lyrics(
     val track: String,
 
     @Column
-    val artist: String
+    val artist: String,
+
+    @Column
+    var timesChosen: Int = 0
 ) {
     constructor() : this(null, "", "", "")
 }
