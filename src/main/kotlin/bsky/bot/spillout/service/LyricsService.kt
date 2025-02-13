@@ -31,7 +31,7 @@ class LyricsService(
     fun getRandomLyricsBot(): Lyrics {
         val allRecords = lyricsRepository.findAll()
         val maxTimesChosen = allRecords.maxOfOrNull { it.timesChosen } ?: 0
-        val threshold = maxTimesChosen - 2
+        val threshold = maxTimesChosen - 1
         val selectedRecord = generateSequence { allRecords.random() }
             .first{ it.timesChosen < threshold }
         selectedRecord.timesChosen++
