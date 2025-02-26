@@ -24,5 +24,5 @@ data class Lyrics(
     @Column
     var timesChosen: Int = 0
 ) {
-    constructor() : this(null, "", "", "")
+    constructor() : this(null, "", "", "", 0)
 }

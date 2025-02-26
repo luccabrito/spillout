@@ -3,6 +3,7 @@ package bsky.bot.spillout.service
 import bsky.bot.spillout.model.Lyrics
 import bsky.bot.spillout.repository.LyricsRepository
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import java.util.Random
 
 @Service
@@ -28,13 +29,14 @@ class LyricsService(
         return lyricsRepository.findAll().random()
     }
 
+    @Transactional
     fun getRandomLyricsBot(): Lyrics {
         val allRecords = lyricsRepository.findAll()
         val maxTimesChosen = allRecords.maxOfOrNull { it.timesChosen } ?: 0
         val threshold = maxTimesChosen - 1
         val selectedRecord = generateSequence { allRecords.random() }
             .first{ it.timesChosen < threshold }
-        selectedRecord.timesChosen++
+        lyricsRepository.save(selectedRecord)
 
         return selectedRecord
     }
